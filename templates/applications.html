@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications | CareerCompass AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #111827;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
+
+        /* MAIN */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            margin-bottom: 8px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        /* APPLICATION CARD */
+        .application-card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #3b82f6;
+        }
+
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .scholarship-name {
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .provider {
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        /* STATUS */
+        .status {
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-applied {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-approved {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-saved {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        /* DETAILS */
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 15px 0;
+            color: #4b5563;
+            font-size: 14px;
+        }
+
+        .detail-item {
+            background: #f9fafb;
+            padding: 9px 12px;
+            border-radius: 8px;
+        }
+
+        /* MESSAGE */
+        .pending-message {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #9a3412;
+            font-size: 14px;
+        }
+
+        .applied-message {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #166534;
+            font-size: 14px;
+        }
+
+        /* BUTTONS */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-success {
+            background: #16a34a;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #15803d;
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        /* EMPTY STATE */
+        .empty {
+            background: white;
+            padding: 50px;
+            text-align: center;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .empty-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .empty h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .application-header {
+                flex-direction: column;
+            }
+
+            .page-title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+
+        <div class="logo">
+            CareerCompass AI
+        </div>
+
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('scholarships') }}">Scholarships</a>
+            <a href="{{ url_for('applications_history') }}">Applications</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <h1 class="page-title">
+            📝 My Scholarship Applications
+        </h1>
+
+        <p class="subtitle">
+            Track the scholarships you have started or submitted.
+        </p>
+
+
+        {% if applications %}
+
+            {% for application in applications %}
+
+                <div class="application-card">
+
+                    <div class="application-header">
+
+                        <div>
+
+                            <div class="scholarship-name">
+                                {{ application.name }}
+                            </div>
+
+                            <div class="provider">
+                                Provider:
+                                {{ application.provider or "Not specified" }}
+                            </div>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+                        {% if application.status == "pending" %}
+
+                            <span class="status status-pending">
+                                🟡 Pending
+                            </span>
+
+                        {% elif application.status == "applied" %}
+
+                            <span class="status status-applied">
+                                ✅ Applied
+                            </span>
+
+                        {% elif application.status == "approved" %}
+
+                            <span class="status status-approved">
+                                🎉 Approved
+                            </span>
+
+                        {% elif application.status == "rejected" %}
+
+                            <span class="status status-rejected">
+                                ❌ Rejected
+                            </span>
+
+                        {% else %}
+
+                            <span class="status status-saved">
+                                🔖 Saved
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- DETAILS -->
+                    <div class="details">
+
+                        {% if application.amount %}
+                            <div class="detail-item">
+                                💰 Amount:
+                                ₹{{ application.amount }}
+                            </div>
+                        {% endif %}
+
+
+                        {% if application.deadline %}
+                            <div class="detail-item">
+                                📅 Deadline:
+                                {{ application.deadline }}
+                            </div>
+                        {% endif %}
+
+
+                        <div class="detail-item">
+                            📝 Started:
+                            {{ application.applied_date }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- PENDING MESSAGE -->
+                    {% if application.status == "pending" %}
+
+                        <div class="pending-message">
+
+                            ⚠️ You started this scholarship application,
+                            but CareerCompass AI has not marked it as submitted yet.
+
+                            <br><br>
+
+                            After you actually submit the application on the
+                            official portal, come back here and click
+                            <strong>"I Have Submitted"</strong>.
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- APPLIED MESSAGE -->
+                    {% if application.status == "applied" %}
+
+                        <div class="applied-message">
+
+                            ✅ You have confirmed that you submitted this
+                            scholarship application.
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- ACTIONS -->
+                    <div class="actions">
+
+
+                        <!-- OFFICIAL PORTAL -->
+                        {% if application.application_link %}
+
+                            <a
+                                href="{{ application.application_link }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn-primary"
+                            >
+                                🌐 Open Official Portal
+                            </a>
+
+                        {% endif %}
+
+
+                        <!-- CONFIRM SUBMISSION -->
+                        {% if application.status == "pending" %}
+
+                            <form
+                                action="{{ url_for(
+                                    'confirm_application',
+                                    application_id=application.application_id
+                                ) }}"
+                                method="POST"
+                                onsubmit="return confirmSubmission();"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-success"
+                                >
+                                    ✅ I Have Submitted
+                                </button>
+
+                            </form>
+
+                        {% endif %}
+
+
+                        <!-- APPLIED -->
+                        {% if application.status == "applied" %}
+
+                            <span class="btn btn-secondary">
+                                ✓ Application Submitted
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <!-- NO APPLICATIONS -->
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <h2>
+                    No Applications Yet
+                </h2>
+
+                <p>
+                    You haven't started any scholarship applications yet.
+                </p>
+
+                <a
+                    href="{{ url_for('scholarships') }}"
+                    class="btn btn-primary"
+                >
+                    🔍 Explore Scholarships
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- CONFIRMATION -->
+    <script>
+
+        function confirmSubmission() {
+
+            return confirm(
+                "Have you actually submitted this scholarship application on the official portal?"
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>

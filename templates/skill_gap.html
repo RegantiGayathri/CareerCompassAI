@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skill Gap Analysis | CareerCompassAI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            color: #1e293b;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 0 60px;
+        }
+
+        /* TOP BAR */
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .title-area h1 {
+            font-size: 32px;
+            margin-bottom: 7px;
+        }
+
+        .title-area p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .back {
+            text-decoration: none;
+            color: white;
+            background: #475569;
+            padding: 11px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .back:hover {
+            background: #334155;
+        }
+
+        /* INTRO */
+
+        .intro {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .intro h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            color: #64748b;
+            line-height: 1.7;
+            max-width: 850px;
+        }
+
+        .career-badge {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 9px 16px;
+            border-radius: 30px;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
+        /* SUMMARY */
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        }
+
+        .summary-card .icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .summary-card h3 {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .summary-card .number {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .green {
+            color: #16a34a;
+        }
+
+        .red {
+            color: #dc2626;
+        }
+
+        .blue {
+            color: #4f46e5;
+        }
+
+        /* MATCH */
+
+        .match-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .match-header h2 {
+            font-size: 22px;
+        }
+
+        .match-percentage {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .progress-background {
+            height: 18px;
+            width: 100%;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            border-radius: 20px;
+            transition: width 0.8s ease;
+        }
+
+        .match-description {
+            margin-top: 15px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* MAIN GRID */
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            font-size: 21px;
+        }
+
+        /* SKILLS */
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 17px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            transition: 0.2s;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(15, 23, 42, 0.06);
+        }
+
+        .skill-name {
+            font-weight: bold;
+        }
+
+        .skill-status {
+            font-size: 13px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 20px;
+        }
+
+        .matched {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .needed {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            color: #64748b;
+            line-height: 1.6;
+            padding: 10px 0;
+        }
+
+        /* LEARNING PATH */
+
+        .learning-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .roadmap {
+            list-style: none;
+            counter-reset: roadmap;
+        }
+
+        .roadmap li {
+            counter-increment: roadmap;
+            position: relative;
+            padding: 17px 18px 17px 65px;
+            margin-bottom: 13px;
+            background: #f8fafc;
+            border-radius: 12px;
+            color: #475569;
+            line-height: 1.5;
+            border: 1px solid #e2e8f0;
+        }
+
+        .roadmap li::before {
+            content: counter(roadmap);
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #4f46e5;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* ACTION */
+
+        .action-card {
+            background: linear-gradient(135deg, #312e81, #4f46e5);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(79, 70, 229, 0.25);
+        }
+
+        .action-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .action-card p {
+            opacity: 0.9;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .action-button {
+            display: inline-block;
+            background: white;
+            color: #4338ca;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 94%;
+                padding-top: 20px;
+            }
+
+            .top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .title-area h1 {
+                font-size: 26px;
+            }
+
+            .match-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- TOP -->
+
+    <div class="top">
+
+        <div class="title-area">
+
+            <h1>
+                🧩 Skill Gap Analysis
+            </h1>
+
+            <p>
+                Understand where you stand and what you need to learn next.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- INTRO -->
+
+    <div class="intro">
+
+        <h2>
+            Hi {{ user.full_name }} 👋
+        </h2>
+
+        <p>
+            CareerCompassAI analyzes your current skills and compares
+            them with the skills required for your selected career path.
+            This helps you identify your strengths and the areas you
+            should focus on improving.
+        </p>
+
+        <span class="career-badge">
+            🎯 Target Career: {{ target_career }}
+        </span>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary">
+
+        <div class="summary-card">
+
+            <div class="icon">
+                ✅
+            </div>
+
+            <h3>
+                Skills Matched
+            </h3>
+
+            <div class="number green">
+                {{ strong_skills|length }}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="icon">
+                ⚠️
+            </div>
+
+            <h3>
+                Skills To Improve
+            </h3>
+
+            <div class="number red">
+                {{ missing_skills|length }}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="icon">
+                🎯
+            </div>
+
+            <h3>
+                Career
+            </h3>
+
+            <div class="number blue" style="font-size:20px;">
+                {{ target_career }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SKILL MATCH -->
+
+    <div class="match-card">
+
+        <div class="match-header">
+
+            <h2>
+                📊 Overall Skill Match
+            </h2>
+
+            <div class="match-percentage">
+
+                {% if strong_skills|length + missing_skills|length > 0 %}
+
+                    {{ (
+                        strong_skills|length /
+                        (strong_skills|length + missing_skills|length)
+                        * 100
+                    )|round(0) }}%
+
+                {% else %}
+
+                    0%
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-background">
+
+            <div
+                class="progress-bar"
+                id="skillProgressBar"
+                data-progress="{% if strong_skills|length + missing_skills|length > 0 %}{{ (strong_skills|length / (strong_skills|length + missing_skills|length) * 100)|round(0) }}{% else %}0{% endif %}"
+            ></div>
+
+        </div>
+
+
+        <p class="match-description">
+
+            This percentage represents how many of the currently
+            evaluated career skills match your profile.
+
+            {% if missing_skills|length > 0 %}
+
+                Keep learning the missing skills to improve
+                your career readiness.
+
+            {% else %}
+
+                Excellent! Your current skills cover all the
+                evaluated requirements.
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+
+    <!-- STRONG + MISSING -->
+
+    <div class="main-grid">
+
+        <!-- STRONG SKILLS -->
+
+        <div class="card">
+
+            <h2 class="card-title">
+                ✅ Your Strong Skills
+            </h2>
+
+            {% if strong_skills %}
+
+                <div class="skill-list">
+
+                    {% for skill in strong_skills %}
+
+                        <div class="skill-item">
+
+                            <span class="skill-name">
+                                {{ skill }}
+                            </span>
+
+                            <span class="skill-status matched">
+                                Matched
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p class="empty">
+                    No matching skills identified yet.
+                    Add your skills through your profile.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- MISSING SKILLS -->
+
+        <div class="card">
+
+            <h2 class="card-title">
+                ⚠️ Skills To Improve
+            </h2>
+
+            {% if missing_skills %}
+
+                <div class="skill-list">
+
+                    {% for skill in missing_skills %}
+
+                        <div class="skill-item">
+
+                            <span class="skill-name">
+                                {{ skill }}
+                            </span>
+
+                            <span class="skill-status needed">
+                                Learn
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p class="empty">
+                    🎉 Great! No major skill gaps identified.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- LEARNING PATH -->
+
+    <div class="learning-card">
+
+        <h2 class="card-title">
+            📚 Recommended Learning Path
+        </h2>
+
+        <ol class="roadmap">
+
+            {% for step in roadmap %}
+
+                <li>
+                    {{ step }}
+                </li>
+
+            {% endfor %}
+
+        </ol>
+
+    </div>
+
+
+    <!-- ACTION -->
+
+    <div class="action-card">
+
+        <h2>
+            🚀 Ready to Close Your Skill Gaps?
+        </h2>
+
+        <p>
+            Follow your learning roadmap, build real-world projects,
+            improve your resume, and prepare for technical interviews.
+        </p>
+
+        <a
+            href="{{ url_for('learning_roadmap') }}"
+            class="action-button"
+        >
+            View Learning Roadmap →
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const progressBar = document.getElementById("skillProgressBar");
+
+        if (progressBar) {
+
+            const progress =
+                parseFloat(progressBar.dataset.progress) || 0;
+
+            progressBar.style.width =
+                Math.min(Math.max(progress, 0), 100) + "%";
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>

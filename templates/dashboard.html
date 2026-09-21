@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - CareerCompassAI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(
+                135deg,
+                #eef2ff,
+                #f8fafc
+            );
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .welcome {
+            color: #334155;
+        }
+
+        .logout {
+            text-decoration: none;
+            background: #ef4444;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 7px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            color: #64748b;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #1e293b;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            transition: 0.25s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+
+        .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #64748b;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="navbar">
+
+        <div class="logo">
+            🚀 CareerCompassAI
+        </div>
+
+        <div class="nav-right">
+
+            <span class="welcome">
+                Welcome, {{ user_name }} 👋
+            </span>
+
+            <a href="{{ url_for('logout') }}"
+               class="logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="heading">
+
+            <h1>Your Career Dashboard</h1>
+
+            <p>
+                Explore tools to plan and build your career.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <!-- PROFILE -->
+
+            <a href="{{ url_for('profile') }}"
+               class="card">
+
+                <div class="icon">👤</div>
+
+                <h2>My Profile</h2>
+
+                <p>
+                    View and update your personal,
+                    college and academic information.
+                </p>
+
+            </a>
+
+
+            <!-- CAREER RECOMMENDATION -->
+
+            <a href="{{ url_for('career_recommendation') }}"
+               class="card">
+
+                <div class="icon">🎯</div>
+
+                <h2>Career Recommendation</h2>
+
+                <p>
+                    Explore career options based
+                    on your skills and interests.
+                </p>
+
+            </a>
+
+
+            <!-- RESUME -->
+
+            <a href="{{ url_for('resume_analysis') }}"
+               class="card">
+
+                <div class="icon">📄</div>
+
+                <h2>Resume Analysis</h2>
+
+                <p>
+                    Analyze your resume and identify
+                    areas for improvement.
+                </p>
+
+            </a>
+
+
+            <!-- ATS -->
+
+            <a href="{{ url_for('ats_score') }}"
+               class="card">
+
+                <div class="icon">📊</div>
+
+                <h2>ATS Score</h2>
+
+                <p>
+                    Check how well your resume performs
+                    against ATS systems.
+                </p>
+
+            </a>
+
+
+            <!-- SKILL GAP -->
+
+            <a href="{{ url_for('skill_gap') }}"
+               class="card">
+
+                <div class="icon">🧩</div>
+
+                <h2>Skill Gap</h2>
+
+                <p>
+                    Identify missing skills required
+                    for your target career.
+                </p>
+
+            </a>
+
+
+            <!-- LEARNING ROADMAP -->
+
+            <a href="{{ url_for('learning_roadmap') }}"
+               class="card">
+
+                <div class="icon">📚</div>
+
+                <h2>Learning Roadmap</h2>
+
+                <p>
+                    Get a structured roadmap to improve
+                    your technical skills.
+                </p>
+
+            </a>
+
+
+            <!-- SCHOLARSHIPS -->
+
+            <a href="{{ url_for('scholarships') }}"
+               class="card">
+
+                <div class="icon">💼</div>
+
+                <h2>Scholarships</h2>
+
+                <p>
+                    Discover scholarships and
+                    funding opportunities.
+                </p>
+
+            </a>
+
+
+            <!-- APPLICATIONS -->
+
+            <a href="{{ url_for('applications_history') }}"
+               class="card">
+
+                <div class="icon">📝</div>
+
+                <h2>Applications</h2>
+
+                <p>
+                    Track your scholarship applications
+                    and their status.
+                </p>
+
+            </a>
+
+
+            <!-- INTERVIEW -->
+
+            <a href="{{ url_for('interview') }}"
+               class="card">
+
+                <div class="icon">🎤</div>
+
+                <h2>Interview Preparation</h2>
+
+                <p>
+                    Prepare for technical and
+                    HR interviews.
+                </p>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
