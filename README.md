@@ -1,29 +1,31 @@
 # CareerCompass AI
 
-An Intelligent Career Readiness & Skill Gap Analysis Platform.
+An intelligent career guidance platform for students.
+
+## Features
+
+- Resume Analysis
+- ATS Score
+- Career Recommendation
+- Skill Gap Analysis
+- Learning Roadmap
+- Scholarships
+- Applications Tracking
+- Interview Preparation
 
 ## Technologies Used
 
 - Python
 - Flask
 - MySQL
-- HTML5
-- CSS3
-- Bootstrap 5
+- HTML
+- CSS
 - JavaScript
-- SQLAlchemy
-- Flask-Login
+- Jinja2
+- PyPDF2
 
-## Project Description
+## Tools
 
-CareerCompass AI helps students prepare for placements by:
-- Uploading and analyzing resumes
-- Calculating ATS resume scores
-- Identifying skill gaps
-- Comparing skills with company requirements
-- Generating personalized learning roadmaps
-- Tracking career readiness
-
-## Developed By
-
-Gayathri Reganti
+- VS Code
+- Git
+- GitHub
